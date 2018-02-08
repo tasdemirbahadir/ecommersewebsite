@@ -1,16 +1,18 @@
-Spring Boot Multi Module Maven Project With:
+# Spring Boot Multi Module Maven Project With:
 
-Hibernate (MySQL)
-Spring Security
-Prime Faces
-JUnit
+- Hibernate (MySQL)
+- Spring Security
+- Prime Faces
+- JUnit
 
-Parent project: dmall
+### Parent project: dmall
 
-Sub Modules:
+### Sub Modules:
 
-backoffice: To be able to configure app details and data.
+- commons: db opeartions, services and other common libraries
 
-selleroffice: To provide sellers a management console for their products and other data.
+- backoffice: To be able to configure app details and data.
 
-mallfront: The store side of the project. The products are listed here and the buyers can shop.
+- selleroffice: To provide sellers a management console for their products and other data.
+
+- mallfront: The store side of the project. The products are listed here and the buyers can shop.
