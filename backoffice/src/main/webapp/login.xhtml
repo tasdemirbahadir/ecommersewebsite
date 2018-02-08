@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="layout.xhtml">
+	<ui:define name="content">
+		<h3>Back Office Management Login</h3>
+		<font color="red"> <h:outputLabel
+				value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
+		</font>
+		<form action="${request.contextPath}/appLogin" method="post">
+			<h:outputLabel value="Enter UserName:" />
+			<input type="text" name="app_username" /><br />
+			<br />
+			<h:outputLabel value="Enter Password:" />
+			<input type="password" name="app_password" /> <br />
+			<br /> <input type="submit" value="Login" /> <input type="hidden"
+				name="${_csrf.parameterName}" value="${_csrf.token}" />
+		</form>
+	</ui:define>
+</ui:composition>
+</html>

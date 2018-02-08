@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    	http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    	
+    <changeSet id="role" author="bahadirtasdemir" runOnChange="true">
+		<createTable tableName="role">
+			<column autoIncrement="true" name="id" type="bigint(20)">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="name" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="description" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+		<insert tableName="role">
+	        <column name="name" value="ADMIN"/>
+	        <column name="description" value="Admin Role"/>
+	    </insert>
+	    <insert tableName="role">
+	        <column name="name" value="BUYER"/>
+	        <column name="description" value="Buyer Role"/>
+	    </insert>
+	    <insert tableName="role">
+	        <column name="name" value="SELLER"/>
+	        <column name="description" value="Seller Role"/>
+	    </insert>
+	    <insert tableName="role">
+	        <column name="name" value="MODERATOR"/>
+	        <column name="description" value="Moderator Role"/>
+	    </insert>
+	</changeSet>
+	
+    <changeSet id="user" author="bahadirtasdemir" runOnChange="true">
+		<createTable tableName="user">
+			<column autoIncrement="true" name="id" type="bigint(20)">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="first_name" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="last_name" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="email" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="password" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="role_id" type="bigint(20)">
+				<constraints nullable="false" />
+			</column>
+			<column name="cr_date" type="datetime">
+				<constraints nullable="false" />
+			</column>
+			<column name="mo_date" type="datetime">
+				<constraints nullable="true" />
+			</column>
+			<column name="deleted" type="bit(1)">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+		<addForeignKeyConstraint 
+		    baseColumnNames="role_id"
+			baseTableName="user" 
+			constraintName="fk_user_role"
+			onDelete="CASCADE"
+			onUpdate="CASCADE" 
+			referencedColumnNames="id" 
+			referencedTableName="role" />
+	</changeSet>
+	
+    <changeSet id="category" author="bahadirtasdemir" runOnChange="true">
+		<createTable tableName="category">
+			<column autoIncrement="true" name="id" type="bigint(20)">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="category_key" type="varchar(255)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="name" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="description" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="parent_id" type="bigint(20)">
+				<constraints nullable="true" />
+			</column>
+			<column name="cr_date" type="datetime">
+				<constraints nullable="false" />
+			</column>
+			<column name="mo_date" type="datetime">
+				<constraints nullable="true" />
+			</column>
+			<column name="deleted" type="bit(1)">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+		<addForeignKeyConstraint 
+		    baseColumnNames="parent_id"
+			baseTableName="category" 
+			constraintName="fk_category_parent"
+			onDelete="CASCADE"
+			onUpdate="CASCADE" 
+			referencedColumnNames="id" 
+			referencedTableName="category" />
+	</changeSet>
+
+	<changeSet id="product" author="bahadirtasdemir" runOnChange="true">
+		<createTable tableName="product">
+			<column autoIncrement="true" name="id" type="bigint(20)">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="title" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="description" type="varchar(1000)">
+				<constraints nullable="false" />
+			</column>
+			<column name="category_id" type="bigint(20)">
+				<constraints nullable="true" />
+			</column>
+			<column name="cr_date" type="datetime">
+				<constraints nullable="false" />
+			</column>
+			<column name="mo_date" type="datetime">
+				<constraints nullable="true" />
+			</column>
+			<column name="user_id" type="bigint(20)">
+				<constraints nullable="false" />
+			</column>
+			<column name="deleted" type="bit(1)">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+		<addForeignKeyConstraint 
+		    baseColumnNames="category_id"
+			baseTableName="product" 
+			constraintName="fk_product_category"
+			onDelete="CASCADE"
+			onUpdate="CASCADE" 
+			referencedColumnNames="id" 
+			referencedTableName="category" />
+		<addForeignKeyConstraint 
+		    baseColumnNames="user_id"
+			baseTableName="product" 
+			constraintName="fk_product_user"
+			onDelete="CASCADE"
+			onUpdate="CASCADE" 
+			referencedColumnNames="id" 
+			referencedTableName="user" />
+	</changeSet>
+
+</databaseChangeLog>

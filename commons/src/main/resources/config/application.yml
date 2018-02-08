@@ -1,0 +1,59 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+          hbm2ddl.auto: validate
+          show_sql: false
+          format_sql: false
+          use_sql_comments: false
+liquibase:
+  change-log: classpath:/db/changelog/master.xml
+  
+---
+
+spring:
+  profiles: dev
+  jpa:
+    properties:
+      hibernate:
+          dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+          show_sql: true
+          format_sql: true
+          use_sql_comments: true
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/pocproject?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull&amp;useSSL=false
+    username: root
+    password: 123456
+logging:
+  level:
+    org.springframework.web: DEBUG
+    guru.springframework.controllers: DEBUG
+    org.hibernate: DEBUG
+  
+---
+
+spring:
+  profiles: test
+  jpa:
+    properties:
+      hibernate:
+          dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+          show_sql: true
+          format_sql: true
+          use_sql_comments: true
+  datasource:
+    url: jdbc:mysql://localhost/sbmm
+    username: sbmm
+    password: sbmm
+  
+---
+
+spring:
+  profiles: embeddeddb
+  jpa:
+    properties:
+      hibernate:
+          dialect: org.hibernate.dialect.H2Dialect
+  datasource:
+    url: jdbc:h2:mem:sbmm

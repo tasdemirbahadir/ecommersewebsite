@@ -1,0 +1,13 @@
+package com.btasdemir.dmall.commons.core.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.btasdemir.dmall.commons.core.domain.Category;
+
+public interface CategoryRepository extends JpaRepository<Category, Long> {
+
+	List<Category> findByParentId(Long parentId);
+	
+}

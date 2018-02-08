@@ -1,0 +1,4 @@
+spring:
+  data:
+    rest:
+      max-page-size: 20

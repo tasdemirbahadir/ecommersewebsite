@@ -1,0 +1,17 @@
+spring:
+  data:
+    rest:
+      max-page-size: 20
+server:
+  context-path: /backoffice
+  port: 9090
+  
+---
+
+spring:
+  profiles: dev
+logging:
+  level:
+    org.springframework.web: DEBUG
+    guru.springframework.controllers: DEBUG
+    org.hibernate: DEBUG
